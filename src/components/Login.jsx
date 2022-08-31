@@ -4,13 +4,30 @@ import WelcomeCard from "../layout/WelcomeCard";
 import Button from "./Button";
 import Input from "./Input";
 import InputPassword from "./InputPassword";
+import { useDispatch } from "react-redux";
+import { loginIn } from "../slice/user/userSlice";
+import authentication from "../feature/auth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const reqBody = { email: "super@airvend.ng", password: "Qwerty@123!!!!" };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!password || !email) alert("all field is required");
+    else {
+      authentication("login", reqBody)().then((res) => {
+        if (res) {
+          dispatch(loginIn(res));
+          navigate("/dashboard");
+        }
+      });
+    }
   };
   return (
     <WelcomeCard>
@@ -25,8 +42,8 @@ const Login = () => {
             placeholder="Ferdnardjohn73"
             type="text"
             required={true}
-            value={username}
-            onValueChange={setUsername}
+            value={email}
+            onValueChange={setEmail}
             id="username"
           />
           <InputPassword
