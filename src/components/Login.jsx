@@ -19,15 +19,13 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!password || !email) alert("all field is required");
-    else {
-      authentication("login", reqBody)().then((res) => {
-        if (res) {
-          dispatch(loginIn(res));
-          navigate("/dashboard");
-        }
-      });
-    }
+
+    authentication("login", reqBody)().then((res) => {
+      if (res) {
+        dispatch(loginIn(res));
+        navigate("/dashboard");
+      }
+    });
   };
   return (
     <WelcomeCard>

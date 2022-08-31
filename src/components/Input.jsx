@@ -25,7 +25,6 @@ const Input = ({
           onBlur={() => setFocus(false)}
           value={value}
           onChange={(e) => onValueChange(e.target.value)}
-          required
         />
         <div className="absolute right-[5px] top-[10px]">{icon}</div>
       </div>

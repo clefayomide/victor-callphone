@@ -10,6 +10,16 @@ const authentication = (authType, payload) => {
         console.log(error);
       }
     },
+
+    logout: async () => {
+      try {
+        // endpoint returns 404
+        const response = await req.post("logout");
+        return response.data.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
   };
   return authOptions[authType];
 };
